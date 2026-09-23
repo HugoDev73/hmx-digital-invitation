@@ -1,0 +1,93 @@
+<section class="countdown" aria-label="Cuenta regresiva para el evento">
+  <div class="countdown__grid">
+    <div class="countdown__cell">
+      <span class="countdown__value" data-countdown="days">00</span>
+      <span class="countdown__label">Días</span>
+    </div>
+    <div class="countdown__cell">
+      <span class="countdown__value" data-countdown="hours">00</span>
+      <span class="countdown__label">Horas</span>
+    </div>
+    <div class="countdown__cell">
+      <span class="countdown__value" data-countdown="minutes">00</span>
+      <span class="countdown__label">Min</span>
+    </div>
+    <div class="countdown__cell">
+      <span class="countdown__value" data-countdown="seconds">00</span>
+      <span class="countdown__label">Seg</span>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { event } from '../../data/event';
+
+  const target = new Date(event.date.iso).getTime();
+
+  const cells = {
+    days: document.querySelector('[data-countdown="days"]'),
+    hours: document.querySelector('[data-countdown="hours"]'),
+    minutes: document.querySelector('[data-countdown="minutes"]'),
+    seconds: document.querySelector('[data-countdown="seconds"]'),
+  };
+
+  function pad(value: number) {
+    return String(value).padStart(2, '0');
+  }
+
+  function tick() {
+    const diff = Math.max(target - Date.now(), 0);
+
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    if (cells.days instanceof HTMLElement) cells.days.textContent = String(days);
+    if (cells.hours instanceof HTMLElement) cells.hours.textContent = pad(hours);
+    if (cells.minutes instanceof HTMLElement) cells.minutes.textContent = pad(minutes);
+    if (cells.seconds instanceof HTMLElement) cells.seconds.textContent = pad(seconds);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+<style>
+  .countdown {
+    padding: 0.5rem 1.5rem 2rem;
+  }
+
+  .countdown__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .countdown__cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.75rem 0.25rem;
+    background: color-mix(in srgb, var(--rose-soft) 16%, var(--bg));
+    border: 1px solid color-mix(in srgb, var(--rose-strong) 30%, transparent);
+    border-radius: 12px;
+  }
+
+  .countdown__value {
+    font-family: var(--font-title);
+    font-size: clamp(1.4rem, 6vw, 1.7rem);
+    font-weight: 700;
+    color: var(--rose-strong);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown__label {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+</style>

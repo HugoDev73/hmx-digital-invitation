@@ -1,0 +1,77 @@
+/* Card shell: edge-to-edge on mobile, centered card on larger screens.
+   See docs/spec-project.md section 9. */
+.u-shell {
+  max-width: 432px;
+  margin-inline: auto;
+  background: var(--bg);
+  min-height: 100svh;
+  position: relative;
+}
+
+@media (min-width: 480px) {
+  body {
+    background: color-mix(in srgb, var(--bg) 85%, var(--ink) 15%);
+  }
+
+  .u-shell {
+    margin-block: 2rem;
+    min-height: auto;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px -20px rgba(101, 66, 62, 0.35);
+    border: 1px solid color-mix(in srgb, var(--rose) 45%, transparent);
+  }
+}
+
+.u-eyebrow {
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+}
+
+/* Ornamental line-dot-line divider. The element itself is the center dot;
+   the two flanking lines are generated content. */
+.u-divider {
+  position: relative;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin: 16px auto;
+}
+
+.u-divider::before,
+.u-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 1px;
+  background: var(--gold);
+  transform: translateY(-50%);
+}
+
+.u-divider::before {
+  right: 100%;
+  margin-right: 5px;
+}
+
+.u-divider::after {
+  left: 100%;
+  margin-left: 5px;
+}
+
+.u-pill {
+  display: inline-block;
+  padding: 0.4rem 1.25rem;
+  border: 1px solid var(--rose-strong);
+  border-radius: 999px;
+  font-family: var(--font-title);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+}

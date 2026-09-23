@@ -1,0 +1,136 @@
+---
+import { event } from '../../data/event';
+---
+
+<section class="hero">
+  <p class="u-eyebrow hero__eyebrow">{event.title}</p>
+
+  <img
+    src="/bouquet.webp"
+    alt=""
+    aria-hidden="true"
+    class="hero__bouquet"
+    loading="eager"
+  />
+
+  <div class="u-divider hero__divider" aria-hidden="true"></div>
+
+  <div class="hero__portrait">
+    <img
+      src="/celebrant.webp"
+      alt={`Ilustración de ${event.celebrant}`}
+      class="hero__celebrant"
+      loading="eager"
+    />
+    <div class="hero__scrim" aria-hidden="true"></div>
+    <h1 class="hero__name">{event.celebrant}</h1>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    text-align: center;
+    padding: 3.5rem 1.5rem 1.5rem;
+  }
+
+  .hero__eyebrow {
+    margin-bottom: 1.75rem;
+    animation: fade-up 0.6s ease both;
+  }
+
+  .hero__bouquet {
+    position: absolute;
+    top: -0.5rem;
+    right: -0.75rem;
+    width: 148px;
+    aspect-ratio: 1 / 1;
+    object-fit: contain;
+    animation: bouquet-fade-up 0.6s ease 0.1s both;
+  }
+
+  .hero__divider {
+    margin: 1rem auto;
+    animation: fade-up 0.6s ease 0.2s both;
+  }
+
+  .hero__portrait {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .hero__celebrant {
+    display: block;
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: top center;
+    animation: fade-up 0.6s ease 0.3s both;
+    -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 96%);
+    mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 96%);
+  }
+
+  .hero__scrim {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 46%;
+    background: linear-gradient(to bottom, transparent, var(--bg) 65%, var(--bg) 100%);
+    pointer-events: none;
+  }
+
+  .hero__name {
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    width: max-content;
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: clamp(1.85rem, 8vw, 2.5rem);
+    font-weight: 600;
+    color: var(--rose-strong);
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+    text-shadow:
+      0 0 14px var(--bg),
+      0 0 14px var(--bg);
+    animation: name-fade-up 0.6s ease 0.45s both;
+  }
+
+  @keyframes bouquet-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px) rotate(180deg);
+    }
+    to {
+      opacity: 1;
+      transform: rotate(180deg);
+    }
+  }
+
+  @keyframes name-fade-up {
+    from {
+      opacity: 0;
+      transform: translate(-50%, 14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+</style>

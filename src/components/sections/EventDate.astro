@@ -1,0 +1,35 @@
+---
+import { event } from '../../data/event';
+---
+
+<section class="event-date">
+  <p class="event-date__weekday">{event.date.weekday}</p>
+  <p class="event-date__day">{event.date.day}</p>
+  <span class="u-pill">{event.date.month} {event.date.year}</span>
+</section>
+
+<style>
+  .event-date {
+    text-align: center;
+    padding: 0.5rem 1.5rem 1.5rem;
+  }
+
+  .event-date__weekday {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-title);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .event-date__day {
+    margin: 0 0 1rem;
+    font-family: var(--font-title);
+    font-size: clamp(3rem, 16vw, 4.125rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--rose-strong);
+  }
+</style>

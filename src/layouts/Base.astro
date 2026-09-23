@@ -1,0 +1,130 @@
+---
+import '@fontsource/cinzel/400.css';
+import '@fontsource/cinzel/600.css';
+import '@fontsource/cinzel/700.css';
+import '@fontsource/jost/300.css';
+import '@fontsource/jost/400.css';
+import '@fontsource/jost/500.css';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/utilities.css';
+import { event } from '../data/event';
+
+type Props = {
+  title?: string;
+  description?: string;
+};
+
+const {
+  title = `${event.title} · ${event.celebrant}`,
+  description = 'Acompáñanos a celebrar. Toca para ver los detalles.',
+} = Astro.props;
+
+// TODO: once astro.config.mjs `site` is set, build this from Astro.site
+// instead of a relative path (see docs/spec-project.md section 11).
+const ogImage = '/og.jpg';
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <div class="u-shell">
+      <div class="u-petals" id="petals" aria-hidden="true"></div>
+      <div class="u-content">
+        <slot />
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // Subtle falling-petals background — see docs/spec-project.md section 9.
+  // Skipped entirely under prefers-reduced-motion, not just paused via CSS.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const wrap = document.getElementById('petals');
+    if (wrap instanceof HTMLElement) {
+      const styles = getComputedStyle(document.documentElement);
+      const colors = [
+        styles.getPropertyValue('--rose-soft').trim(),
+        styles.getPropertyValue('--rose').trim(),
+      ];
+      const count = 9;
+
+      for (let i = 0; i < count; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'u-petal';
+        const size = 9 + Math.random() * 10;
+        petal.style.width = `${size}px`;
+        petal.style.height = `${size}px`;
+        petal.style.left = `${Math.random() * 100}%`;
+        petal.style.animationDuration = `${9 + Math.random() * 7}s`;
+        petal.style.animationDelay = `${-Math.random() * 12}s`;
+        const color = colors[i % colors.length];
+        petal.innerHTML = `<svg viewBox="0 0 24 24" fill="${color}"><path d="M12 3c3 2 5 5 5 8 0 4-2.5 7-5 10-2.5-3-5-6-5-10 0-3 2-6 5-8Z" opacity=".85"/></svg>`;
+        wrap.appendChild(petal);
+      }
+    }
+  }
+</script>
+
+<style>
+  .u-content {
+    position: relative;
+    z-index: 1;
+  }
+
+  .u-petals {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .u-petals :global(.u-petal) {
+    position: absolute;
+    top: -24px;
+    opacity: 0;
+    animation: petal-fall linear infinite;
+  }
+
+  .u-petals :global(.u-petal svg) {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  @keyframes petal-fall {
+    0% {
+      transform: translateY(-30px) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.55;
+    }
+    90% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(115vh) rotate(320deg);
+      opacity: 0;
+    }
+  }
+</style>

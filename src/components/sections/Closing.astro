@@ -1,0 +1,55 @@
+---
+import Button from '../ui/Button.astro';
+import { event } from '../../data/event';
+---
+
+<section class="closing">
+  <p class="closing__text">{event.closing}</p>
+  <Button href="/event.ics" label="Agregar al calendario" variant="solid" download>
+    <svg
+      slot="icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+      <path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"></path>
+    </svg>
+  </Button>
+  <svg class="closing__heart" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path
+      d="M12 21s-7.5-4.9-10-9.3C.6 8.7 2 5.5 5 5.1c1.9-.3 3.4.8 4.2 2 .3.5.5.9.8 1.4.3-.5.5-.9.8-1.4.8-1.2 2.3-2.3 4.2-2 3 .4 4.4 3.6 3 6.6C19.5 16.1 12 21 12 21Z"
+    ></path>
+  </svg>
+</section>
+
+<style>
+  .closing {
+    text-align: center;
+    padding: 2.5rem 1.5rem 3.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .closing__text {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+    max-width: 26ch;
+  }
+
+  .closing__heart {
+    width: 22px;
+    height: 22px;
+    color: var(--rose-soft);
+    margin-top: 0.25rem;
+  }
+</style>

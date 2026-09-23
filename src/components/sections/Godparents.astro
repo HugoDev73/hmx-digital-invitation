@@ -1,0 +1,50 @@
+---
+import { godparents } from '../../data/godparents';
+---
+
+<section class="godparents">
+  <p class="u-eyebrow">Padrinos</p>
+  <div class="u-divider" aria-hidden="true"></div>
+  <ul class="godparents__list">
+    {
+      godparents.map((group) => (
+        <li class="godparents__group">
+          <p class="godparents__role">{group.role}</p>
+          <p class="godparents__names">{group.names}</p>
+        </li>
+      ))
+    }
+  </ul>
+</section>
+
+<style>
+  .godparents {
+    text-align: center;
+    padding: 2rem 1.5rem;
+  }
+
+  .godparents__list {
+    list-style: none;
+    margin: 1.25rem 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .godparents__role {
+    margin: 0 0 0.25rem;
+    font-family: var(--font-title);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+
+  .godparents__names {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+</style>

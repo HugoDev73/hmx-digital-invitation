@@ -1,0 +1,14 @@
+:root {
+  /* Roses */
+  --rose-strong: #BF777F;
+  --rose:        #D28990;
+  --rose-soft:   #E7B3B8;
+  /* Base */
+  --bg:          #F7F1E8;  /* cream background */
+  --gold:        #C8A96B;  /* gold, decorative only */
+  --ink:         #65423E;  /* ink / main text */
+
+  /* Typography */
+  --font-title: 'Cinzel', serif;
+  --font-body:  'Jost', sans-serif;
+}

@@ -1,0 +1,89 @@
+---
+type Props = {
+  href: string;
+  label: string;
+  variant?: 'solid' | 'outline';
+  target?: '_blank';
+  ariaLabel?: string;
+  download?: boolean;
+};
+
+const { href, label, variant = 'outline', target, ariaLabel, download } = Astro.props;
+const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
+---
+
+<a
+  href={href}
+  class:list={['button', `button--${variant}`]}
+  target={target}
+  rel={rel}
+  aria-label={ariaLabel}
+  download={download}
+>
+  <slot name="icon" />
+  {label}
+</a>
+
+<style>
+  /* Text is always --ink or --bg, both of which meet the contrast rules
+     in docs/spec-project.md section 3 at any size. --rose-strong is used
+     only as a decorative border/icon, never as text color. */
+  .button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 0.75rem 1.75rem;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+  }
+
+  .button :global(svg) {
+    width: 18px;
+    height: 18px;
+    flex: none;
+  }
+
+  .button--solid {
+    background: var(--ink);
+    color: var(--bg);
+    border: 1px solid var(--ink);
+  }
+
+  .button--solid :global(svg) {
+    color: var(--gold);
+  }
+
+  .button--solid:hover {
+    background: color-mix(in srgb, var(--ink) 88%, black);
+  }
+
+  .button--outline {
+    background: transparent;
+    color: var(--ink);
+    border: 1.5px solid var(--rose-strong);
+  }
+
+  .button--outline :global(svg) {
+    color: var(--rose-strong);
+  }
+
+  .button--outline:hover {
+    background: color-mix(in srgb, var(--rose-soft) 28%, var(--bg));
+  }
+
+  .button:active {
+    transform: scale(0.97);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button {
+      transition: none;
+    }
+  }
+</style>
