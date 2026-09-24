@@ -32,6 +32,7 @@ It continues the family's physical invitation. The quinceañera illustration and
 
 ## Capabilities and Constraints
 
+- **Deploy:** Vercel at https://xv-areli-edith.vercel.app (domain root; `site` set in `astro.config.mjs`). Pushes to `main` publish to production; other branches get preview URLs.
 - **Stack:** Astro + TypeScript. No UI framework; interactive parts use vanilla JS islands. Fonts are self-hosted through @fontsource (Cinzel, Jost).
 - **Features:**
   - countdown
@@ -47,7 +48,6 @@ It continues the family's physical invitation. The quinceañera illustration and
 - **Open decisions (the family decides; none of these block design work):**
   - Dress code: undecided. Leave room for one line.
   - Gift table or envelope shower ("lluvia de sobres"): undecided. Leave room for a short block.
-  - Deploy target: Vercel or GitHub Pages, undecided. GitHub Pages would need `site`/`base` set.
   - The WhatsApp number and godparent names in the data files are **placeholders** and must be replaced before publishing.
 
 ## Brand Commitments
