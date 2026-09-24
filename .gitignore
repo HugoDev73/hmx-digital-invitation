@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# impeccable (temporary live-mode files)
+.impeccable/live/

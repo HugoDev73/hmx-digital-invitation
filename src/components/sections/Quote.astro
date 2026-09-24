@@ -7,19 +7,22 @@ import { event } from '../../data/event';
 </section>
 
 <style>
+  /* "Caja baja, mucho aire" — docs/spec-project.md section 8. Weight 400
+     keeps the lowercase line legible on a phone in daylight. */
   .quote {
-    padding: 0.5rem 2rem 1.5rem;
+    padding: 0.5rem 2rem 2.5rem;
     text-align: center;
   }
 
   .quote__text {
-    margin: 0;
+    margin: 0 auto;
+    max-width: 30ch;
     font-family: var(--font-body);
-    font-weight: 300;
-    font-size: 1.05rem;
-    line-height: 1.9;
-    letter-spacing: 0.01em;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.8;
     text-transform: lowercase;
+    text-wrap: pretty;
     color: var(--ink);
   }
 </style>

@@ -1,11 +1,27 @@
 /* Card shell: edge-to-edge on mobile, centered card on larger screens.
-   See docs/spec-project.md section 9. */
+   See docs/spec-project.md section 9. Horizontal overflow is clipped at
+   every width so decorative corners (the bouquet) never cause sideways
+   scroll inside WhatsApp's in-app browser. */
 .u-shell {
   max-width: 432px;
   margin-inline: auto;
   background: var(--bg);
   min-height: 100svh;
   position: relative;
+  overflow-x: clip;
+}
+
+/* Inner 1px frame in translucent rose — echoes the border of the printed
+   invitation. Present at every width, including phones. */
+.u-shell::after {
+  content: '';
+  position: absolute;
+  inset: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
+    max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
+  border: 1px solid color-mix(in srgb, var(--rose) 45%, transparent);
+  border-radius: 18px;
+  pointer-events: none;
+  z-index: 2;
 }
 
 @media (min-width: 480px) {
@@ -18,19 +34,33 @@
     min-height: auto;
     border-radius: 24px;
     overflow: hidden;
-    box-shadow: 0 20px 60px -20px rgba(101, 66, 62, 0.35);
-    border: 1px solid color-mix(in srgb, var(--rose) 45%, transparent);
+    box-shadow:
+      0 2px 6px rgba(101, 66, 62, 0.08),
+      0 24px 48px -24px rgba(101, 66, 62, 0.3);
   }
 }
 
+/* The hero's "Mis XV Años" line (pinned by the brief). */
 .u-eyebrow {
   font-family: var(--font-title);
-  font-size: 0.75rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--ink);
   margin: 0;
+}
+
+/* Section heading: Ceremonia, Recepción, Padrinos, ¿Tienes dudas? */
+.u-heading {
+  font-family: var(--font-title);
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0;
+  text-wrap: balance;
 }
 
 /* Ornamental line-dot-line divider. The element itself is the center dot;
@@ -49,7 +79,7 @@
   content: '';
   position: absolute;
   top: 50%;
-  width: 24px;
+  width: 28px;
   height: 1px;
   background: var(--gold);
   transform: translateY(-50%);
@@ -57,21 +87,49 @@
 
 .u-divider::before {
   right: 100%;
-  margin-right: 5px;
+  margin-right: 6px;
 }
 
 .u-divider::after {
   left: 100%;
-  margin-left: 5px;
+  margin-left: 6px;
 }
 
 .u-pill {
   display: inline-block;
-  padding: 0.4rem 1.25rem;
+  padding: 0.45rem 1.35rem;
   border: 1px solid var(--rose-strong);
   border-radius: 999px;
   font-family: var(--font-title);
-  font-size: 0.85rem;
+  font-size: 1rem;
+  font-weight: 600;
   letter-spacing: 0.08em;
   color: var(--ink);
+}
+
+/* Quiet text link for secondary actions (calendar alternatives). */
+.u-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--rose-strong) 70%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
+}
+
+.u-link:hover {
+  text-decoration-color: var(--ink);
+}
+
+.u-link svg {
+  width: 17px;
+  height: 17px;
+  flex: none;
+  color: var(--rose-strong);
 }

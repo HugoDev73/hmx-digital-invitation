@@ -7,6 +7,8 @@
 html {
   color-scheme: light;
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -14,7 +16,14 @@ body {
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--rose-soft) 45%, transparent);
+}
+
+[hidden] {
+  display: none !important;
 }
 
 img {
@@ -22,9 +31,15 @@ img {
   display: block;
 }
 
+::selection {
+  background: color-mix(in srgb, var(--rose-soft) 70%, var(--bg));
+  color: var(--ink);
+}
+
 :focus-visible {
   outline: 2px solid var(--ink);
   outline-offset: 3px;
+  border-radius: 4px;
 }
 
 @media (prefers-reduced-motion: reduce) {

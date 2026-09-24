@@ -2,13 +2,22 @@ BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//XV Areli Edith//ES
 CALSCALE:GREGORIAN
+METHOD:PUBLISH
 BEGIN:VEVENT
 UID:xv-areli-2026@areli-edith
 DTSTAMP:20260101T000000Z
 DTSTART:20261206T000000Z
 DTEND:20261206T060000Z
 SUMMARY:XV Años de Areli Edith
-DESCRIPTION:Ceremonia 6:00 PM San Antonio de Padua · Recepción 7:00 PM Salón Sol y Luna
-LOCATION:San Antonio de Padua\, Morelia\, Michoacán
+DESCRIPTION:Ceremonia 6:00 PM · San Antonio de Padua\, C. Fray Sebastián de
+  Aparicio 301\, Morelia\nRecepción 7:00 PM · Salón Sol y Luna\, Benito Muñoz
+  471\, Unión\, Morelia
+LOCATION:San Antonio de Padua\, C. Fray Sebastián de Aparicio 301\, Morelia\,
+  Michoacán
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mañana son los XV Años de Areli Edith
+TRIGGER:-P1D
+END:VALARM
 END:VEVENT
 END:VCALENDAR

@@ -11,4 +11,7 @@
   /* Typography */
   --font-title: 'Cinzel', serif;
   --font-body:  'Jost', sans-serif;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
 }

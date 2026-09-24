@@ -3,6 +3,10 @@ export interface Godparent {
   names: string;
 }
 
+// ⚠️ PLACEHOLDER — set to false once the real names below are in place
+// (silences the build warning).
+export const godparentsArePlaceholder = true;
+
 export const godparents: Godparent[] = [
   // ⚠️ PLACEHOLDER — replace with real names
   { role: 'Padrinos de Honor', names: 'Roberto Guzmán y María Elena Torres' },

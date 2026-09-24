@@ -14,12 +14,18 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 ---
 
 <section class="venue">
-  <p class="u-eyebrow">{heading}</p>
+  <h2 class="u-heading">{heading}</h2>
   <div class="u-divider" aria-hidden="true"></div>
   <p class="venue__time">{time}</p>
   <p class="venue__name">{venue}</p>
   <p class="venue__address">{address}</p>
-  <Button href={mapsUrl} label="Cómo llegar" variant="outline" target="_blank">
+  <Button
+    href={mapsUrl}
+    label="Cómo llegar"
+    variant="outline"
+    target="_blank"
+    ariaLabel={`Cómo llegar a ${venue} (abre Google Maps)`}
+  >
     <svg
       slot="icon"
       viewBox="0 0 24 24"
@@ -39,35 +45,45 @@ const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComp
 <style>
   .venue {
     text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
   }
 
-  .venue__time,
-  .venue__name {
+  .venue .u-divider {
+    margin: 14px auto 18px;
+  }
+
+  /* Rose-strong only at ≥24px bold (docs/spec-project.md section 3). */
+  .venue__time {
     margin: 0;
     font-family: var(--font-title);
-    font-weight: 600;
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.15;
     color: var(--rose-strong);
+    font-variant-numeric: lining-nums;
   }
 
-  .venue__time {
-    font-size: 1.6rem;
-  }
-
+  /* The venue name is a fact guests must read in daylight: ink. */
   .venue__name {
+    margin: 0.35rem 0 0;
+    font-family: var(--font-title);
     font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--ink);
+    text-wrap: balance;
   }
 
   .venue__address {
-    margin: 0 0 0.75rem;
+    margin: 0.5rem 0 1.25rem;
     font-family: var(--font-body);
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 1.0625rem;
+    line-height: 1.55;
     color: var(--ink);
     max-width: 28ch;
+    text-wrap: balance;
   }
 </style>

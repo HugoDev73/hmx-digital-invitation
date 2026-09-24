@@ -1,11 +1,27 @@
 ---
 import { event } from '../../data/event';
+import { icsHref } from '../../lib/calendar';
 ---
 
-<section class="event-date">
+<section class="event-date" aria-label="Fecha del evento">
   <p class="event-date__weekday">{event.date.weekday}</p>
   <p class="event-date__day">{event.date.day}</p>
-  <span class="u-pill">{event.date.month} {event.date.year}</span>
+  <p class="event-date__month"><span class="u-pill">{event.date.month} {event.date.year}</span></p>
+  <a class="u-link event-date__save" href={icsHref}>
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <rect x="3" y="4" width="18" height="18" rx="2"></rect>
+      <path d="M16 2v4M8 2v4M3 10h18"></path>
+    </svg>
+    Guardar en mi calendario
+  </a>
 </section>
 
 <style>
@@ -15,21 +31,27 @@ import { event } from '../../data/event';
   }
 
   .event-date__weekday {
-    margin: 0 0 0.25rem;
+    margin: 0 0 0.35rem;
     font-family: var(--font-title);
-    font-size: 1rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
+    font-size: 1.0625rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--ink);
   }
 
+  /* Deliberately smaller than the celebrant's name: the name is the focus. */
   .event-date__day {
-    margin: 0 0 1rem;
+    margin: 0 0 0.75rem;
     font-family: var(--font-title);
-    font-size: clamp(3rem, 16vw, 4.125rem);
+    font-size: clamp(2.25rem, 11vw, 2.875rem);
     font-weight: 700;
     line-height: 1;
     color: var(--rose-strong);
+    font-variant-numeric: lining-nums;
+  }
+
+  .event-date__month {
+    margin: 0 0 0.25rem;
   }
 </style>

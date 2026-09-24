@@ -1,93 +1,161 @@
-<section class="countdown" aria-label="Cuenta regresiva para el evento">
-  <div class="countdown__grid">
-    <div class="countdown__cell">
-      <span class="countdown__value" data-countdown="days">00</span>
-      <span class="countdown__label">Días</span>
-    </div>
-    <div class="countdown__cell">
-      <span class="countdown__value" data-countdown="hours">00</span>
-      <span class="countdown__label">Horas</span>
-    </div>
-    <div class="countdown__cell">
-      <span class="countdown__value" data-countdown="minutes">00</span>
-      <span class="countdown__label">Min</span>
-    </div>
-    <div class="countdown__cell">
-      <span class="countdown__value" data-countdown="seconds">00</span>
-      <span class="countdown__label">Seg</span>
-    </div>
-  </div>
+---
+import { event } from '../../data/event';
+
+// Server-rendered starting values (build time), so the countdown never
+// flashes "00" on a slow connection before the script runs.
+const diff = Math.max(new Date(event.date.iso).getTime() - Date.now(), 0);
+const pad = (value: number) => String(value).padStart(2, '0');
+const initial = {
+  days: String(Math.floor(diff / 86400000)),
+  hours: pad(Math.floor((diff % 86400000) / 3600000)),
+  minutes: pad(Math.floor((diff % 3600000) / 60000)),
+  seconds: pad(Math.floor((diff % 60000) / 1000)),
+};
+
+const units = [
+  { key: 'days', label: 'Días' },
+  { key: 'hours', label: 'Horas' },
+  { key: 'minutes', label: 'Min' },
+  { key: 'seconds', label: 'Seg' },
+] as const;
+---
+
+<section class="countdown" id="countdown" aria-labelledby="countdown-heading">
+  <h2 class="countdown__heading" id="countdown-heading">{event.countdown.heading}</h2>
+  <dl class="countdown__grid">
+    {
+      units.map(({ key, label }) => (
+        <div class="countdown__cell">
+          <dt class="countdown__label">{label}</dt>
+          <dd class="countdown__value" data-countdown={key}>
+            {initial[key]}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+  <p class="countdown__message" data-countdown-message hidden></p>
 </section>
 
-<script>
-  import { event } from '../../data/event';
-
-  const target = new Date(event.date.iso).getTime();
-
+<script
+  is:inline
+  define:vars={{
+    targetIso: event.date.iso,
+    endIso: event.date.endIso,
+    todayText: event.countdown.today,
+    afterText: event.countdown.after,
+  }}
+>
+  // Runs inline (right after the markup) so the numbers are current on first paint.
+  // Michoacán is UTC−6 year-round, so the fixed offset in the ISO strings is exact.
+  const target = new Date(targetIso).getTime();
+  const end = new Date(endIso).getTime();
+  const root = document.getElementById('countdown');
+  const heading = root.querySelector('.countdown__heading');
+  const grid = root.querySelector('.countdown__grid');
+  const message = root.querySelector('[data-countdown-message]');
   const cells = {
-    days: document.querySelector('[data-countdown="days"]'),
-    hours: document.querySelector('[data-countdown="hours"]'),
-    minutes: document.querySelector('[data-countdown="minutes"]'),
-    seconds: document.querySelector('[data-countdown="seconds"]'),
+    days: root.querySelector('[data-countdown="days"]'),
+    hours: root.querySelector('[data-countdown="hours"]'),
+    minutes: root.querySelector('[data-countdown="minutes"]'),
+    seconds: root.querySelector('[data-countdown="seconds"]'),
   };
+  const pad = (value) => String(value).padStart(2, '0');
+  let timer;
 
-  function pad(value: number) {
-    return String(value).padStart(2, '0');
+  function showMessage(text) {
+    heading.hidden = true;
+    grid.hidden = true;
+    message.hidden = false;
+    message.textContent = text;
   }
 
   function tick() {
-    const diff = Math.max(target - Date.now(), 0);
-
-    const days = Math.floor(diff / 86400000);
-    const hours = Math.floor((diff % 86400000) / 3600000);
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
-
-    if (cells.days instanceof HTMLElement) cells.days.textContent = String(days);
-    if (cells.hours instanceof HTMLElement) cells.hours.textContent = pad(hours);
-    if (cells.minutes instanceof HTMLElement) cells.minutes.textContent = pad(minutes);
-    if (cells.seconds instanceof HTMLElement) cells.seconds.textContent = pad(seconds);
+    const now = Date.now();
+    if (now >= end) {
+      showMessage(afterText);
+      clearInterval(timer);
+      return;
+    }
+    if (now >= target) {
+      showMessage(todayText);
+      return;
+    }
+    const diff = target - now;
+    cells.days.textContent = String(Math.floor(diff / 86400000));
+    cells.hours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
+    cells.minutes.textContent = pad(Math.floor((diff % 3600000) / 60000));
+    cells.seconds.textContent = pad(Math.floor((diff % 60000) / 1000));
   }
 
   tick();
-  setInterval(tick, 1000);
+  timer = setInterval(tick, 1000);
 </script>
 
 <style>
   .countdown {
-    padding: 0.5rem 1.5rem 2rem;
+    padding: 1.5rem 1.5rem 2.5rem;
+    text-align: center;
   }
 
+  .countdown__heading {
+    margin: 0 0 0.75rem;
+    font-family: var(--font-title);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* Four numerals separated by hairline gold rules — no boxes. */
   .countdown__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.5rem;
+    /* Four across normally; wraps to 2×2 under very large text settings. */
+    grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
+    row-gap: 1rem;
+    margin: 0 auto;
+    max-width: 22rem;
   }
 
   .countdown__cell {
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.75rem 0.25rem;
-    background: color-mix(in srgb, var(--rose-soft) 16%, var(--bg));
-    border: 1px solid color-mix(in srgb, var(--rose-strong) 30%, transparent);
-    border-radius: 12px;
+    gap: 0.2rem;
+    padding: 0.25rem 0;
+  }
+
+  .countdown__cell + .countdown__cell {
+    border-left: 1px solid color-mix(in srgb, var(--gold) 70%, transparent);
   }
 
   .countdown__value {
+    margin: 0;
     font-family: var(--font-title);
-    font-size: clamp(1.4rem, 6vw, 1.7rem);
+    font-size: clamp(1.75rem, 8vw, 2rem);
     font-weight: 700;
+    line-height: 1.1;
     color: var(--rose-strong);
     font-variant-numeric: tabular-nums;
   }
 
   .countdown__label {
     font-family: var(--font-body);
-    font-size: 0.7rem;
-    letter-spacing: 0.08em;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--ink);
+  }
+
+  .countdown__message {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--rose-strong);
+    text-wrap: balance;
   }
 </style>

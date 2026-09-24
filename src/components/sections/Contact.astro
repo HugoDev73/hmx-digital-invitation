@@ -7,8 +7,15 @@ const whatsappUrl = `https://wa.me/${event.whatsapp}?text=${encodeURIComponent(m
 ---
 
 <section class="contact">
-  <p class="contact__heading">¿Tienes dudas?</p>
-  <Button href={whatsappUrl} label="Escríbenos por WhatsApp" variant="outline" target="_blank">
+  <h2 class="u-heading">¿Tienes dudas?</h2>
+  <div class="u-divider" aria-hidden="true"></div>
+  <Button
+    href={whatsappUrl}
+    label="Escríbenos por WhatsApp"
+    variant="outline"
+    target="_blank"
+    ariaLabel="Escríbenos por WhatsApp (abre WhatsApp)"
+  >
     <svg slot="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path
         d="M12.04 2c-5.46 0-9.9 4.44-9.9 9.9 0 1.75.46 3.45 1.32 4.95L2 22l5.3-1.38a9.9 9.9 0 0 0 4.73 1.2h.01c5.46 0 9.9-4.44 9.9-9.9 0-2.64-1.03-5.13-2.9-7A9.82 9.82 0 0 0 12.04 2Zm5.8 14.06c-.24.68-1.42 1.32-1.95 1.36-.5.05-.98.24-3.3-.69-2.79-1.1-4.55-3.96-4.69-4.14-.14-.18-1.12-1.49-1.12-2.84 0-1.35.71-2.02.96-2.29.24-.27.53-.34.71-.34.18 0 .36 0 .51.01.16.01.39-.06.6.46.24.58.82 2 .89 2.15.07.14.12.31.02.49-.09.18-.14.29-.27.45-.14.16-.29.36-.41.48-.14.14-.28.29-.12.57.16.27.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.21 1.37.27.14.43.12.59-.07.16-.18.68-.79.86-1.07.18-.27.36-.22.61-.13.24.09 1.55.73 1.82.86.27.14.44.2.51.31.07.12.07.68-.17 1.36Z"
@@ -20,18 +27,13 @@ const whatsappUrl = `https://wa.me/${event.whatsapp}?text=${encodeURIComponent(m
 <style>
   .contact {
     text-align: center;
-    padding: 2rem 1.5rem;
+    padding: 2.5rem 1.5rem 2rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1rem;
   }
 
-  .contact__heading {
-    margin: 0;
-    font-family: var(--font-title);
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--ink);
+  .contact .u-divider {
+    margin: 14px auto 20px;
   }
 </style>
