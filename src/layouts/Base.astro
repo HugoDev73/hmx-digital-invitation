@@ -4,6 +4,7 @@ import '@fontsource/cinzel/500.css';
 import '@fontsource/cinzel/600.css';
 import '@fontsource/cinzel/700.css';
 import '@fontsource/jost/400.css';
+import '@fontsource/jost/400-italic.css';
 import '@fontsource/jost/500.css';
 import '../styles/tokens.css';
 import '../styles/base.css';
@@ -28,8 +29,9 @@ const ogImage = Astro.site ? new URL('/og.jpg', Astro.site).href : '/og.jpg';
 if (import.meta.env.PROD) {
   const pending = [
     !Astro.site && '`site` in astro.config.mjs (absolute og:image URL for WhatsApp)',
-    event.whatsappIsPlaceholder && 'WhatsApp number (src/data/event.ts)',
-    godparentsArePlaceholder && 'godparent names (src/data/godparents.ts)',
+    event.whatsappEnabled && event.whatsappIsPlaceholder &&'WhatsApp number (src/data/event.ts)',
+    !event.parents.names && "parents' names (src/data/event.ts; section hidden until set)",
+    godparentsArePlaceholder &&'godparent names (src/data/godparents.ts)',
   ].filter(Boolean);
   if (pending.length > 0) {
     console.warn(`\n⚠️  Placeholder data still in the build:\n  - ${pending.join('\n  - ')}\n`);

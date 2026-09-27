@@ -1,37 +1,11 @@
 ---
-import Button from '../ui/Button.astro';
 import { event } from '../../data/event';
-import { icsHref, googleCalendarHref } from '../../lib/calendar';
 ---
 
 <section class="closing">
   <div class="u-divider" aria-hidden="true"></div>
   <p class="closing__text">{event.closing}</p>
   <p class="closing__signature">{event.celebrant}</p>
-
-  <div class="closing__actions">
-    <!-- No `download` attribute: iOS (including WhatsApp's in-app browser)
-         opens a served .ics as an "Add to Calendar" sheet, but ignores a
-         download link. -->
-    <Button href={icsHref} label="Agregar al calendario" variant="solid">
-      <svg
-        slot="icon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <rect x="3" y="4" width="18" height="18" rx="2"></rect>
-        <path d="M16 2v4M8 2v4M3 10h18M12 14v4M10 16h4"></path>
-      </svg>
-    </Button>
-    <a class="u-link" href={googleCalendarHref} target="_blank" rel="noopener noreferrer">
-      o agrégalo en Google Calendar
-    </a>
-  </div>
 
   <img
     src="/bouquet.webp"
@@ -72,7 +46,7 @@ import { icsHref, googleCalendarHref } from '../../lib/calendar';
 
   /* Sign-off: the name returns at the end, echoing the hero. */
   .closing__signature {
-    margin: 0.9rem 0 2rem;
+    margin: 0.9rem 0 0;
     font-family: var(--font-title);
     font-size: clamp(1.75rem, 9vw, 2.25rem);
     font-weight: 600;
@@ -80,15 +54,6 @@ import { icsHref, googleCalendarHref } from '../../lib/calendar';
     letter-spacing: 0.02em;
     color: var(--rose-strong);
     text-wrap: balance;
-  }
-
-  .closing__actions {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.35rem;
   }
 
   /* Upright bouquet in the bottom-left corner — the diagonal partner of the

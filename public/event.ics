@@ -9,11 +9,12 @@ DTSTAMP:20260101T000000Z
 DTSTART:20261206T000000Z
 DTEND:20261206T060000Z
 SUMMARY:XV Años de Areli Edith
-DESCRIPTION:Ceremonia 6:00 PM · San Antonio de Padua\, C. Fray Sebastián de
-  Aparicio 301\, Morelia\nRecepción 7:00 PM · Salón Sol y Luna\, Benito Muñoz
-  471\, Unión\, Morelia
-LOCATION:San Antonio de Padua\, C. Fray Sebastián de Aparicio 301\, Morelia\,
-  Michoacán
+DESCRIPTION:Misa 6:00 PM · San Antonio de Padua\, Fray Sebastián de Apari
+ cio 301\, Col. Virrey Antonio de Mendoza\, Morelia\, Mich.\nRecepción 7:0
+ 0 PM · Salón Sol y Luna\, Benito Muñoz 471\, Col. Unión\, Morelia\, Mi
+ ch.
+LOCATION:San Antonio de Padua\, Fray Sebastián de Aparicio 301\, Col. Virr
+ ey Antonio de Mendoza\, Morelia\, Mich.
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Mañana son los XV Años de Areli Edith

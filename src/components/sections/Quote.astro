@@ -3,12 +3,12 @@ import { event } from '../../data/event';
 ---
 
 <section class="quote">
-  <p class="quote__text">{event.quote}</p>
+  <p class="quote__text">“{event.quote}”</p>
 </section>
 
 <style>
-  /* "Caja baja, mucho aire" — docs/spec-project.md section 8. Weight 400
-     keeps the lowercase line legible on a phone in daylight. */
+  /* Sentence case, italic and quoted (the spec's "caja baja" read as typos).
+     Weight 400 keeps the italic line legible on a phone in daylight. */
   .quote {
     padding: 0.5rem 2rem 2.5rem;
     text-align: center;
@@ -19,9 +19,9 @@ import { event } from '../../data/event';
     max-width: 30ch;
     font-family: var(--font-body);
     font-weight: 400;
+    font-style: italic;
     font-size: 1.125rem;
     line-height: 1.8;
-    text-transform: lowercase;
     text-wrap: pretty;
     color: var(--ink);
   }

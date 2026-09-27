@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # impeccable (temporary live-mode files)
 .impeccable/live/
+
+# local working notes
+docs/content-audit.md

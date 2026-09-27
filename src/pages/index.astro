@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro';
 import Hero from '../components/sections/Hero.astro';
 import Quote from '../components/sections/Quote.astro';
+import Parents from '../components/sections/Parents.astro';
 import EventDate from '../components/sections/EventDate.astro';
 import Countdown from '../components/sections/Countdown.astro';
 import Venue from '../components/sections/Venue.astro';
 import BetweenVenues from '../components/sections/BetweenVenues.astro';
+import DressCode from '../components/sections/DressCode.astro';
 import Godparents from '../components/sections/Godparents.astro';
 import Contact from '../components/sections/Contact.astro';
 import Closing from '../components/sections/Closing.astro';
@@ -15,10 +17,11 @@ import { event } from '../data/event';
 <Base>
   <Hero />
   <Quote />
+  {event.parents.names && <Parents />}
   <EventDate />
   <Countdown />
   <Venue
-    heading="Ceremonia"
+    heading="Misa"
     time={event.ceremony.time}
     venue={event.ceremony.venue}
     address={event.ceremony.address}
@@ -33,10 +36,9 @@ import { event } from '../data/event';
   />
   <BetweenVenues />
   {/* Phase 2 slot: <Itinerary /> goes here (docs/spec-project.md section 7). */}
-  {/* Pending with the family: <DressCode /> (one line) and <Gifts /> (short
-      block) go here if they decide to include them. */}
+  {event.dressCode.enabled && <DressCode />}
   <Godparents />
   {/* Phase 2 slot: <Gallery /> goes here. */}
-  <Contact />
+  {event.whatsappEnabled && <Contact />}
   <Closing />
 </Base>

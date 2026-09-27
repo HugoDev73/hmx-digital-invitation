@@ -1,0 +1,43 @@
+---
+import { event } from '../../data/event';
+
+const { style, note } = event.dressCode;
+---
+
+<section class="dress-code">
+  <h2 class="u-heading">Código de vestimenta</h2>
+  <div class="u-divider" aria-hidden="true"></div>
+  <p class="dress-code__style">{style}</p>
+  {note && <p class="dress-code__note">{note}</p>}
+</section>
+
+<style>
+  .dress-code {
+    text-align: center;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+
+  .dress-code .u-divider {
+    margin: 14px auto 18px;
+  }
+
+  /* A fact guests must read: ink, like the venue names. */
+  .dress-code__style {
+    margin: 0;
+    font-family: var(--font-title);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+
+  .dress-code__note {
+    margin: 0.6rem auto 0;
+    max-width: 28ch;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    color: var(--ink);
+    text-wrap: balance;
+  }
+</style>

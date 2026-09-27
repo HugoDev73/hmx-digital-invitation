@@ -4,7 +4,7 @@ import { event } from '../data/event';
 const start = '20261206T000000Z';
 const end = '20261206T060000Z';
 
-const details = `Ceremonia ${event.ceremony.time} · ${event.ceremony.venue}, ${event.ceremony.address}\nRecepción ${event.reception.time} · ${event.reception.venue}, ${event.reception.address}`;
+const details = `Misa ${event.ceremony.time} · ${event.ceremony.venue}, ${event.ceremony.address}\nRecepción ${event.reception.time} · ${event.reception.venue}, ${event.reception.address}`;
 
 export const icsHref = '/event.ics';
 
