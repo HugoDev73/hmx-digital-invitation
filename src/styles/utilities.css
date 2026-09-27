@@ -51,7 +51,8 @@
   margin: 0;
 }
 
-/* Section heading: Misa, Recepción, Padrinos, ¿Tienes dudas? */
+/* Section heading: Misa, Recepción, Código de vestimenta, Padrinos
+   (and ¿Tienes dudas? when the contact section is enabled). */
 .u-heading {
   font-family: var(--font-title);
   font-size: 1.125rem;

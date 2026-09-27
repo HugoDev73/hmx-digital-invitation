@@ -96,6 +96,7 @@ const units = [
   .countdown {
     padding: 1.5rem 1.5rem 2.5rem;
     text-align: center;
+    container: countdown / inline-size;
   }
 
   .countdown__heading {
@@ -111,8 +112,7 @@ const units = [
   /* Four numerals separated by hairline gold rules — no boxes. */
   .countdown__grid {
     display: grid;
-    /* Four across normally; wraps to 2×2 under very large text settings. */
-    grid-template-columns: repeat(auto-fit, minmax(4.5rem, 1fr));
+    grid-template-columns: repeat(4, 1fr);
     row-gap: 1rem;
     margin: 0 auto;
     max-width: 22rem;
@@ -128,6 +128,19 @@ const units = [
 
   .countdown__cell + .countdown__cell {
     border-left: 1px solid color-mix(in srgb, var(--gold) 70%, transparent);
+  }
+
+  /* Always four across on phones (even 320px); only when the text is scaled
+     so large that four cells no longer fit (rem grows with the user's text
+     size) does it switch to 2×2, with the rule only between the two columns. */
+  @container countdown (width < 15rem) {
+    .countdown__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .countdown__cell + .countdown__cell:nth-child(odd) {
+      border-left: 0;
+    }
   }
 
   .countdown__value {

@@ -1,7 +1,7 @@
 ---
 import { event } from '../../data/event';
 
-const { lead, names } = event.parents;
+const { lead, names, follow } = event.parents;
 ---
 
 <!-- No section heading: it reads as the continuation of the quote above,
@@ -9,6 +9,7 @@ const { lead, names } = event.parents;
 <section class="parents" aria-label="Mis papás">
   <p class="parents__lead">{lead}</p>
   <p class="parents__names">{names}</p>
+  {follow && <p class="parents__follow">{follow}</p>}
 </section>
 
 <style>
@@ -25,6 +26,15 @@ const { lead, names } = event.parents;
     line-height: 1.6;
     color: var(--ink);
     text-wrap: balance;
+  }
+
+  .parents__follow {
+    margin: 0.6rem auto 0;
+    max-width: 28ch;
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
   }
 
   .parents__names {

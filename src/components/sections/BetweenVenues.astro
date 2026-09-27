@@ -23,7 +23,7 @@ const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURICompo
       <path d="M12 7v5l3 2"></path>
     </svg>
     <p class="between-venues__text">
-      El salón está a solo <strong>350&nbsp;m</strong> de la iglesia, unos 5&nbsp;minutos caminando.
+      El salón está a solo <strong>350&nbsp;m</strong> de la iglesia: unos 5&nbsp;minutos caminando o 1&nbsp;minuto en auto.
     </p>
     <Button
       href={routeUrl}
@@ -42,9 +42,9 @@ const routeUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURICompo
         stroke-linejoin="round"
         aria-hidden="true"
       >
-        <path d="M18 8 22 12 18 16"></path>
-        <path d="M2 12h20"></path>
-        <path d="M6 16 2 12 6 8"></path>
+        <circle cx="6" cy="19" r="3"></circle>
+        <path d="M9 19h8.5a3.5 3.5 0 0 0 0-7h-11a3.5 3.5 0 0 1 0-7H15"></path>
+        <circle cx="18" cy="5" r="3"></circle>
       </svg>
     </Button>
   </div>

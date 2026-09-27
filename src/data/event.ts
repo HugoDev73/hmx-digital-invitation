@@ -4,9 +4,11 @@ export const event = {
   quote:
     'Hay momentos que pasan en un instante y recuerdos que permanecen eternamente. Quiero que formes parte de este.',
   parents: {
-    lead: 'De la mano de mis papás, que me han acompañado en cada paso',
+    lead: 'De la mano de mis papás, que me han acompañado en cada paso,',
     // the section is hidden while this is empty
     names: 'Eliseo Mendoza y Reina Hernández',
+    // completes the sentence after the names
+    follow: 'te invito a celebrar conmigo.',
   },
   date: {
     weekday: 'Sábado',
@@ -39,7 +41,7 @@ export const event = {
     // set to false to hide the section
     enabled: true,
     style: 'Libre',
-    note: 'Con cariño, te pedimos dejar el rosa para la quinceañera.',
+    note: 'Con cariño, te pido reservar el rosa para mí.',
   },
   closing: 'Te espero para celebrar juntos este gran día.',
   // ⚠️ PLACEHOLDER — replace with the real number before publishing

@@ -23,8 +23,8 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# impeccable (temporary live-mode files)
-.impeccable/live/
+# impeccable (local design-review notes and live-mode files)
+.impeccable/
 
 # local working notes
 docs/content-audit.md

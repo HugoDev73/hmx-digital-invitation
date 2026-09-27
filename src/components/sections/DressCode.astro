@@ -7,7 +7,7 @@ const { style, note } = event.dressCode;
 <section class="dress-code">
   <h2 class="u-heading">Código de vestimenta</h2>
   <div class="u-divider" aria-hidden="true"></div>
-  <p class="dress-code__style">{style}</p>
+  {style && <p class="dress-code__style">{style}</p>}
   {note && <p class="dress-code__note">{note}</p>}
 </section>
 
