@@ -4,9 +4,10 @@ import { event } from '../../data/event';
 const { lead, names, follow } = event.parents;
 ---
 
-<!-- No section heading: it reads as the continuation of the quote above,
-     then leads into the date. -->
+<!-- No section heading: a gold divider marks it as its own beat between the
+     countdown and the venues; "te invito a celebrar conmigo" leads into Misa. -->
 <section class="parents" aria-label="Mis papás">
+  <div class="u-divider" aria-hidden="true"></div>
   <p class="parents__lead">{lead}</p>
   <p class="parents__names">{names}</p>
   {follow && <p class="parents__follow">{follow}</p>}
@@ -15,7 +16,11 @@ const { lead, names, follow } = event.parents;
 <style>
   .parents {
     text-align: center;
-    padding: 0 1.5rem 2.5rem;
+    padding: 0 1.5rem 1rem;
+  }
+
+  .parents .u-divider {
+    margin: 0 auto 1.5rem;
   }
 
   .parents__lead {

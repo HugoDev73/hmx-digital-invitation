@@ -12,31 +12,28 @@ const { style, note } = event.dressCode;
 </section>
 
 <style>
+  /* Same rhythm and type as the Padrinos section: the style line mirrors
+     .godparents__role and the note mirrors .godparents__names. */
   .dress-code {
     text-align: center;
     padding: 2.5rem 1.5rem 2rem;
   }
 
-  .dress-code .u-divider {
-    margin: 14px auto 18px;
-  }
-
-  /* A fact guests must read: ink, like the venue names. */
   .dress-code__style {
-    margin: 0;
+    margin: 1.25rem 0 0.3rem;
     font-family: var(--font-title);
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
     color: var(--ink);
   }
 
   .dress-code__note {
-    margin: 0.6rem auto 0;
-    max-width: 28ch;
+    margin: 0 auto;
+    max-width: 30ch;
     font-family: var(--font-body);
     font-size: 1.0625rem;
-    line-height: 1.55;
+    line-height: 1.5;
     color: var(--ink);
     text-wrap: balance;
   }

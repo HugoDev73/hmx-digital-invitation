@@ -17,9 +17,9 @@ import { event } from '../data/event';
 <Base>
   <Hero />
   <Quote />
-  {event.parents.names && <Parents />}
   <EventDate />
   <Countdown />
+  {event.parents.names && <Parents />}
   <Venue
     heading="Misa"
     time={event.ceremony.time}
